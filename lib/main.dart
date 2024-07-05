@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import "homeViewWidget.dart";
 
-class Post{//投稿の情報
+class Post{//todo 投稿の情報
 
 }
 

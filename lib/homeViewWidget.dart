@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'main.dart';
 
 
-Widget PostModeltoWidget(BuildContext context, WidgetRef ref){//ここに投稿の見た目を作る
+Widget PostModeltoWidget(BuildContext context, WidgetRef ref){//todo ここに投稿の見た目を作る
 
   final listState = ref.watch(provider);
 
