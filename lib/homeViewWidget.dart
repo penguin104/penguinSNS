@@ -3,11 +3,59 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'main.dart';
 
 
-Widget PostModeltoWidget(BuildContext context, WidgetRef ref){//todo ここに投稿の見た目を作る
+Widget PostModeltoWidget(BuildContext context, Post post){//todo ここに投稿の見た目を作る
 
-  final listState = ref.watch(provider);
+  // ユーザのアイコン
+  final iconImage = Image.asset(
+    post.user.iconImage.path,
+    width: 60,
+    height: 60,
+  );
+  // ユーザ名
+  final userName = Text(post.user.userName);
+  // 投稿された画像
+  final imageList = ListView.builder(
+    scrollDirection: Axis.horizontal,//横並び
+    shrinkWrap: true,
+    itemCount: post.images.length,
+      itemBuilder: (context,i){
+    return Image.asset(post.images[i].path);
+  });
+  // 本文
+  final mainContents = Text(post.mainContents);
+  // いいねボタン
+  //todo いいねしたか表示
+  final niceButton = IconButton(
+      onPressed: (){},
+      icon: Icon(Icons.favorite));
 
-  return;
+  //まとめる
+  final row1 = Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      iconImage,
+      userName,
+    ],
+  );
+
+  final row2 = Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      mainContents,
+      niceButton
+    ],
+  );
+
+  final colPost = Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      row1,
+      imageList,
+      row2
+    ],
+  );
+
+  return colPost;
 }
 
 
@@ -25,6 +73,7 @@ class HomeviewState extends ConsumerState<Homeview> {
 
   final testProvider = ref.watch(provider.notifier);
 
+    // 投稿をバーってする
     final homeList = ListView.builder(
       shrinkWrap: true,
       itemCount: testProvider.state.length,//リスト.length
@@ -42,9 +91,31 @@ class HomeviewState extends ConsumerState<Homeview> {
       child: colHomeView,//container in column
     );
 
+
+    // 追加ボタン
+    final addButton = Container(
+      width: 80,
+      height: 80,
+
+      child: FloatingActionButton(
+        onPressed: (){
+          //処理
+        },
+        backgroundColor: Colors.cyan,
+        foregroundColor: Colors.white,
+        child: Icon(
+          Icons.add,
+          size:40,
+        ),
+
+      ),
+    );
+
+
     //returnするwidget
     final homeViewScaffolld = Scaffold(
       appBar: AppBar(
+
         centerTitle: true,
         title: Text("Penguin SNS(仮)",
           style: TextStyle(
@@ -78,6 +149,8 @@ class HomeviewState extends ConsumerState<Homeview> {
               label: "person"),
         ],
       ),
+      floatingActionButton: addButton,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
 
     return homeViewScaffolld;
