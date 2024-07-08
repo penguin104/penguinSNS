@@ -115,7 +115,6 @@ class HomeviewState extends ConsumerState<Homeview> {
     //returnするwidget
     final homeViewScaffolld = Scaffold(
       appBar: AppBar(
-
         centerTitle: true,
         title: Text("Penguin SNS(仮)",
           style: TextStyle(
@@ -126,29 +125,7 @@ class HomeviewState extends ConsumerState<Homeview> {
       body: Center(
         child: conHomeView,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.cyan,
-        fixedColor: Color(0xffffaf0f),
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(
-                  Icons.home,
-                  color: Colors.white
-              ),
-              label: "home"),
-          BottomNavigationBarItem(
-              icon: Icon(
-                  Icons.search,
-                  color: Colors.white
-              ),
-              label:"serch"),
-          BottomNavigationBarItem(
-              icon: Icon(
-                  Icons.person,
-                  color: Colors.white),
-              label: "person"),
-        ],
-      ),
+
       floatingActionButton: addButton,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
@@ -156,3 +133,31 @@ class HomeviewState extends ConsumerState<Homeview> {
     return homeViewScaffolld;
   }
 }
+
+
+
+
+//ボトム
+// bottomNavigationBar: BottomNavigationBar(
+// backgroundColor: Colors.cyan,
+// fixedColor: Color(0xffffaf0f),
+// items: [
+// BottomNavigationBarItem(
+// icon: Icon(
+// Icons.home,
+// color: Colors.white
+// ),
+// label: "home"),
+// BottomNavigationBarItem(
+// icon: Icon(
+// Icons.favorite,
+// color: Colors.white
+// ),
+// label:"favorite"),
+// BottomNavigationBarItem(
+// icon: Icon(
+// Icons.person,
+// color: Colors.white),
+// label: "person"),
+// ],
+// ),

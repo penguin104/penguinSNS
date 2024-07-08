@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
 import "homeViewWidget.dart";
+import 'profile.dart';
+
 
 class Post{//todo 投稿の情報
   Post(this.dateTime,this.mainContents,this.images,this.user);//コンストラクタ
@@ -24,10 +26,6 @@ class User{
   List<User> followUser = [];
   int followerCnt = 0;
   List<User> followerUser =[];
-
-
-
-
 }
 
 
@@ -43,6 +41,30 @@ final provider = StateProvider((ref){
   return test;
 });
 
+class BaseWidget extends ConsumerStatefulWidget {
+  const BaseWidget({super.key});
+
+  @override
+  BaseWidgetState createState() => BaseWidgetState();
+}
+
+class BaseWidgetState extends ConsumerState<BaseWidget> {
+  @override
+  Widget build(BuildContext context) {
+
+
+    // ページの情報
+    final pages = [
+      const Homeview(),
+      const ProfileView()
+    ];
+
+    return Scaffold(
+    // todo https://zenn.dev/maguroburger/articles/use_persistent_bottom_nav_bar
+    );
+  }
+}
+
 
 
 
@@ -51,7 +73,7 @@ void main(){
   final app = MaterialApp(
     home: Scaffold(
       body: Center(
-        child: Homeview(),
+        child: ProfileView(),
       ),
     ),
   );
