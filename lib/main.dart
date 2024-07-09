@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import "homeViewWidget.dart";
 import 'profile.dart';
@@ -60,6 +61,34 @@ class BaseWidgetState extends ConsumerState<BaseWidget> {
     ];
 
     return Scaffold(
+      body: PersistentTabView(
+        context,
+        screens: pages,
+        navBarStyle: NavBarStyle.simple,
+        items: [
+          PersistentBottomNavBarItem(
+            icon: Icon(Icons.home),
+            inactiveIcon: Icon(Icons.home_outlined),
+            title: "ホーム",
+            activeColorPrimary: Colors.cyan,
+            inactiveColorPrimary: Theme.of(context).disabledColor,
+          ),
+          // PersistentBottomNavBarItem(
+          //   icon: Icon(Icons.favorite),
+          //   inactiveIcon: Icon(Icons.favorite_border),
+          //   title: "お気に入り",
+          //   activeColorPrimary: Colors.cyan,
+          //   inactiveColorPrimary: Theme.of(context).disabledColor,
+          // ),
+          PersistentBottomNavBarItem(
+            icon: Icon(Icons.person),
+            inactiveIcon: Icon(Icons.person),
+            title: "マイページ",
+            activeColorPrimary: Colors.cyan,
+            inactiveColorPrimary: Theme.of(context).disabledColor,
+          )
+        ],
+      ),
     // todo https://zenn.dev/maguroburger/articles/use_persistent_bottom_nav_bar
     );
   }
@@ -73,7 +102,7 @@ void main(){
   final app = MaterialApp(
     home: Scaffold(
       body: Center(
-        child: ProfileView(),
+        child: BaseWidget(),
       ),
     ),
   );
