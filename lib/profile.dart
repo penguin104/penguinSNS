@@ -17,12 +17,15 @@ class ProfileViewState extends ConsumerState<ProfileView> {
 
   @override
   void initState(){
-
+    // final Profile =User();//todo Xfile形式で画像を渡す
   }
 
 
   @override
   Widget build(BuildContext context) {
+
+    // final myIcon = Image.asset();
+
 
     final profileScaffold =Scaffold(
       appBar: AppBar(

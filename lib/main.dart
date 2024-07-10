@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:penguin_sns/favorite.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import "homeViewWidget.dart";
 import 'profile.dart';
+import 'favorite.dart';
 
 
 class Post{//todo 投稿の情報
@@ -19,19 +21,19 @@ class Post{//todo 投稿の情報
 }
 class User{
   User(this.iconImage);
-  String userName = "No Name Penguin";
-  XFile iconImage;
-  String profile = "";
-  List<Post> myPost = [];
-  int followCnt = 0;
-  List<User> followUser = [];
-  int followerCnt = 0;
-  List<User> followerUser =[];
+  String userName = "No Name Penguin";//ユーザ名
+  XFile iconImage;//アイコン画像
+  String profile = "";//プロフィール文
+  List<Post> myPost = [];//自分の投稿
+  int followCnt = 0;//フォロー数
+  List<User> followUser = [];//フォローしてる人
+  int followerCnt = 0;//フォロワー数
+  List<User> followerUser =[];//フォロワー
 }
 
 
 
-final provider = StateProvider((ref){
+final providerPost = StateProvider((ref){
   final test = [
     "あ",
     "い",
@@ -39,7 +41,8 @@ final provider = StateProvider((ref){
     "え",
     "お",
   ];
-  return test;
+  final List<Post> providerPost = [];
+  return providerPost;
 });
 
 class BaseWidget extends ConsumerStatefulWidget {
@@ -57,6 +60,7 @@ class BaseWidgetState extends ConsumerState<BaseWidget> {
     // ページの情報
     final pages = [
       const Homeview(),
+      const FavoriteView(),
       const ProfileView()
     ];
 
@@ -64,7 +68,8 @@ class BaseWidgetState extends ConsumerState<BaseWidget> {
       body: PersistentTabView(
         context,
         screens: pages,
-        navBarStyle: NavBarStyle.simple,
+        navBarStyle: NavBarStyle.style8,
+
         items: [
           PersistentBottomNavBarItem(
             icon: Icon(Icons.home),
@@ -73,13 +78,13 @@ class BaseWidgetState extends ConsumerState<BaseWidget> {
             activeColorPrimary: Colors.cyan,
             inactiveColorPrimary: Theme.of(context).disabledColor,
           ),
-          // PersistentBottomNavBarItem(
-          //   icon: Icon(Icons.favorite),
-          //   inactiveIcon: Icon(Icons.favorite_border),
-          //   title: "お気に入り",
-          //   activeColorPrimary: Colors.cyan,
-          //   inactiveColorPrimary: Theme.of(context).disabledColor,
-          // ),
+          PersistentBottomNavBarItem(
+            icon: Icon(Icons.favorite),
+            inactiveIcon: Icon(Icons.favorite_border),
+            title: "お気に入り",
+            activeColorPrimary: Colors.cyan,
+            inactiveColorPrimary: Theme.of(context).disabledColor,
+          ),
           PersistentBottomNavBarItem(
             icon: Icon(Icons.person),
             inactiveIcon: Icon(Icons.person),

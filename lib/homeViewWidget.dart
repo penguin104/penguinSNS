@@ -19,7 +19,7 @@ Widget PostModeltoWidget(BuildContext context, Post post){//todo ここに投稿
     shrinkWrap: true,
     itemCount: post.images.length,
       itemBuilder: (context,i){
-    return Image.asset(post.images[i].path);
+    return Image.asset(post.images[i].path);//todo firebaseに対応させる
   });
   // 本文
   final mainContents = Text(post.mainContents);
@@ -71,7 +71,7 @@ class HomeviewState extends ConsumerState<Homeview> {
   @override
   Widget build(BuildContext context) {
 
-  final testProvider = ref.watch(provider.notifier);
+  final testProvider = ref.watch(providerPost.notifier);
 
     // 投稿をバーってする
     final homeList = ListView.builder(
@@ -134,30 +134,3 @@ class HomeviewState extends ConsumerState<Homeview> {
   }
 }
 
-
-
-
-//ボトム
-// bottomNavigationBar: BottomNavigationBar(
-// backgroundColor: Colors.cyan,
-// fixedColor: Color(0xffffaf0f),
-// items: [
-// BottomNavigationBarItem(
-// icon: Icon(
-// Icons.home,
-// color: Colors.white
-// ),
-// label: "home"),
-// BottomNavigationBarItem(
-// icon: Icon(
-// Icons.favorite,
-// color: Colors.white
-// ),
-// label:"favorite"),
-// BottomNavigationBarItem(
-// icon: Icon(
-// Icons.person,
-// color: Colors.white),
-// label: "person"),
-// ],
-// ),
